@@ -1,0 +1,49 @@
+@import "reset.css";
+
+
+#usersTable {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.table {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 12px -6px #eeeeee, 8px 0 12px -6px #eeeeee;
+}
+
+.table-header-container {
+    border-collapse: collapse;
+    background: #019879;
+    border-radius: 2px 2px 0 0;
+    font-size: 6px;
+    color: #e4fefe;
+}
+
+.table-row, .table-header{
+    display: flex;
+    font-size: 6px;
+    font-weight: 300;
+    align-items: flex-start;
+    padding: 2px 0 2px 7px ;
+}
+
+
+
+.table-row:hover {
+    background: #f3f3f3;
+    color: #1d8871;
+}
+
+.table-cell{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+}
+
+.table-body{
+    border-bottom: 1px solid #1d8871;
+}
