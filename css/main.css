@@ -4,7 +4,7 @@
 #usersTable {
     display: flex;
     justify-content: center;
-    margin: 30px 0;
+    margin: 15px 0;
 }
 
 .table {
@@ -46,4 +46,17 @@
 
 .table-body{
     border-bottom: 1px solid #1d8871;
+}
+
+.delete-button{
+    height: 10px;
+    font-size: 3px;
+    border:1px solid #818888;
+    border-radius: 2px;
+}
+
+.delete-button:hover{
+    box-sizing: border-box;
+    border:1px solid #019879;
+    border-radius: 2px;
 }
