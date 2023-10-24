@@ -18,13 +18,12 @@
     border-collapse: collapse;
     background: #019879;
     border-radius: 2px 2px 0 0;
-    font-size: 6px;
     color: #e4fefe;
 }
 
 .table-row, .table-header{
     display: flex;
-    font-size: 6px;
+    font-size: 26px;
     font-weight: 300;
     align-items: flex-start;
     padding: 2px 0 2px 7px ;
@@ -49,8 +48,8 @@
 }
 
 .delete-button{
-    height: 10px;
-    font-size: 3px;
+    width: 150px;
+    font-size: 22px;
     border:1px solid #818888;
     border-radius: 2px;
 }

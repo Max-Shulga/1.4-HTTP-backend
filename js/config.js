@@ -1,4 +1,4 @@
-const imageWidth = 16;
+const imageWidth = 60;
 
 const config = {
     parent: '#usersTable',

@@ -3,16 +3,15 @@ import fallbackUsers from "./fallbackUsers.js";
 import sendRequest from "./sendRequest.js";
 
 function DataTable(config) {
-    return (async () => {
+    (async () => {
         try {
-
             const {apiUrl: url, parent, columns} = config;
             const request = await sendRequest(url, 'GET');
 
             //merging a unique id with the data.
-            let users =  Object.entries(request.data).map(([id, obj]) => {
+            let users = Object.entries(request.data).map(([id, obj]) => {
                 return {
-                id: Number(id),
+                    id: Number(id),
                     ...obj
                 };
             });
@@ -39,35 +38,12 @@ function DataTable(config) {
             //adding data to the table body
             parentElement.appendChild(table);
 
-            return users;
         } catch (error) {
             console.log(error)
         }
     })();
 }
 
-
-async function initializeTable() {
-    try {
-        const usersPromise = DataTable(config);
-        const users = await usersPromise;
-        const deleteButtons = await waitForButtons('delete-button');
-
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const id = button.id;
-                const user = document.getElementById(id)
-                console.log(user)
-
-                // sendRequest(`${config.apiUrl}/${id}`, "DELETE")
-                // removeLine(id);
-            })
-        })
-
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 function createTableHeader(columns, users) {
 
@@ -90,62 +66,64 @@ function createTableHeader(columns, users) {
     return headTr;
 }
 
-function createTableBody(data, columns) {
+function createTableBody(users, columns) {
+
     const tbody = document.createElement('tbody');
     tbody.className = 'table-body';
 
-    data.forEach((rowData, rowIndex) => {
+    users.forEach((user, rowIndex) => {
         const bodyTr = document.createElement('tr');
         bodyTr.className = 'table-row';
-        bodyTr.id = rowIndex
-        bodyTr.innerHTML = `<td class="table-body-cell table-cell table-row-${++rowIndex}">${rowIndex}</td>`;
+        bodyTr.id = user.id
+        bodyTr.innerHTML = `<td class="table-body-cell table-cell table-row-${++rowIndex} index-cell">${rowIndex}</td>`;
 
-        columns.forEach((column) => {
-            if (rowData[column.value]) {
+        columns.forEach((column,columnIndex) => {
+            if (user[column.value]) {
                 const td = document.createElement('td');
                 td.className = `table-body-cell table-cell table-row-${rowIndex}`;
                 const renderFunction = column.render || ((value) => value.toString());
-                const content = renderFunction(rowData[column.value]);
+                const content = renderFunction(user[column.value]);
 
                 typeof content === 'string' ? td.textContent = content.toString() : td.appendChild(content);
                 bodyTr.appendChild(td);
             }
         });
-        bodyTr.innerHTML += `<td class="table-body-cell table-cell table-row-${rowIndex}">
-<button class="delete-button"" >Видалити</button></td>`;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = "delete-button";
+        deleteButton.dataset.userId = user.id;
+        deleteButton.textContent = "Видалити";
+        deleteButton.onclick = deleteUser;
+        bodyTr.appendChild(deleteButton);
+
         tbody.appendChild(bodyTr);
     });
 
     return tbody;
 }
 
-document.addEventListener('DOMContentLoaded', initializeTable);
+DataTable(config)
 
-function waitForButtons(selector) {
-    return new Promise((resolve) => {
-        const checkButtons = () => {
-            const buttons = document.getElementsByClassName(selector);
-            if ([...buttons].length > 0) {
-                resolve([...buttons]);
-            } else {
-                setTimeout(checkButtons, 100);
-            }
-        };
-
-        checkButtons();
-    });
+function rewriteIndexes() {
+    const indexCell =  [...document.getElementsByClassName('index-cell')]
+    indexCell.map((cell,index)=>{
+        cell.innerHTML = ++index
+    })
 }
 
-function removeLine(id) {
-
+function deleteUser(event) {
+    (async () => {
+        try {
+            const userId = event.currentTarget.dataset.userId;
+            await sendRequest(`${config.apiUrl}/${userId}`, "DELETE")
+            const row = document.getElementById(userId);
+            row.remove();
+            rewriteIndexes();
+        } catch (error) {
+            console.error(error)
+        }
+    })()
 }
-
-
-
-
-
-
-
 
 
 

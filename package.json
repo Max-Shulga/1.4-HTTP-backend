@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node main.mjs"
+  },
+  "name": "1.4-http-backend",
+  "version": "1.0.0",
+  "description": "1.4 study repository for 1.4 lvl",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}
