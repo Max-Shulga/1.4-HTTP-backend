@@ -1,47 +1,45 @@
-import config from "./config.js" ;
+import {config} from "./config.js" ;
 import fallbackUsers from "./fallbackUsers.js";
 import sendRequest from "./sendRequest.js";
 
-function DataTable(config) {
-    (async () => {
-        try {
-            const {apiUrl: url, parent, columns} = config;
-            const request = await sendRequest(url, 'GET');
+async function DataTable(config) {
+    try {
+        const {apiUrl: url, parent, columns} = config;
+        const request = await sendRequest(url, 'GET');
 
-            //merging a unique id with the data.
-            let users = Object.entries(request.data).map(([id, obj]) => {
-                return {
-                    id: Number(id),
-                    ...obj
-                };
-            });
+        //merging a unique id with the data.
+        let users = Object.entries(request.data).map(([id, obj]) => {
+            return {
+                id: Number(id),
+                ...obj
+            };
+        });
 
-            users ??= fallbackUsers
-            const parentElement = document.querySelector(parent);
+        users ??= fallbackUsers
+        const parentElement = document.querySelector(parent);
 
-            const table = document.createElement('table');
-            table.className = 'table';
+        const table = document.createElement('table');
+        table.className = 'table';
 
-            const thead = document.createElement('thead');
-            thead.className = 'table-header-container';
-            thead.appendChild(createTableHeader(columns, users));
+        const thead = document.createElement('thead');
+        thead.className = 'table-header-container';
+        thead.appendChild(createTableHeader(columns, users));
 
-            const headTr = document.createElement('tr');
-            headTr.className = 'table-header';
+        const headTr = document.createElement('tr');
+        headTr.className = 'table-header';
 
-            //adding data to the table header
-            headTr.innerHTML = `<th class="table-header-cell table-cell table-column-1">№</th>`;
+        //adding data to the table header
+        headTr.innerHTML = `<th class="table-header-cell table-cell table-column-1">№</th>`;
 
-            table.appendChild(thead);
-            table.appendChild(createTableBody(users, columns))
+        table.appendChild(thead);
+        table.appendChild(createTableBody(users, columns))
 
-            //adding data to the table body
-            parentElement.appendChild(table);
+        //adding data to the table body
+        parentElement.appendChild(table);
 
-        } catch (error) {
-            console.log(error)
-        }
-    })();
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
@@ -77,7 +75,7 @@ function createTableBody(users, columns) {
         bodyTr.id = user.id
         bodyTr.innerHTML = `<td class="table-body-cell table-cell table-row-${++rowIndex} index-cell">${rowIndex}</td>`;
 
-        columns.forEach((column,columnIndex) => {
+        columns.forEach((column, columnIndex) => {
             if (user[column.value]) {
                 const td = document.createElement('td');
                 td.className = `table-body-cell table-cell table-row-${rowIndex}`;
@@ -104,26 +102,24 @@ function createTableBody(users, columns) {
 
 DataTable(config)
 
-function rewriteIndexes() {
-    const indexCell =  [...document.getElementsByClassName('index-cell')]
-    indexCell.map((cell,index)=>{
-        cell.innerHTML = ++index
-    })
-}
 
 function deleteUser(event) {
     (async () => {
         try {
             const userId = event.currentTarget.dataset.userId;
             await sendRequest(`${config.apiUrl}/${userId}`, "DELETE")
-            const row = document.getElementById(userId);
-            row.remove();
-            rewriteIndexes();
+
+            const table = document.getElementsByClassName('table')[0];
+
+            await DataTable(config).then(() => {
+                table.remove();
+            });
         } catch (error) {
             console.error(error)
         }
     })()
 }
+
 
 
 

@@ -1,6 +1,6 @@
 const imageWidth = 60;
 
-const config = {
+export const config = {
     parent: '#usersTable',
     columns: [
         {title: 'Ім’я', value: 'name'},
@@ -26,4 +26,3 @@ function renderDate(value) {
     return `${day}.${month}.${date.getFullYear()}`
 }
 
-export default config

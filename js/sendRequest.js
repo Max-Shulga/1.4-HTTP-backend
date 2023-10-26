@@ -1,5 +1,4 @@
 async function sendRequest(url, method, body = null) {
-
     try {
         const options = {
             method,

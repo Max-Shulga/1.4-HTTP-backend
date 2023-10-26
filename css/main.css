@@ -4,7 +4,7 @@
 #usersTable {
     display: flex;
     justify-content: center;
-    margin: 15px 0;
+    margin: 40px 0;
 }
 
 .table {
@@ -12,23 +12,31 @@
     display: flex;
     flex-direction: column;
     box-shadow: -8px 0 12px -6px #eeeeee, 8px 0 12px -6px #eeeeee;
+    border-radius: 13px 13px 0 0;
+
 }
 
 .table-header-container {
     border-collapse: collapse;
     background: #019879;
-    border-radius: 2px 2px 0 0;
+    border-radius: 13px 13px 0 0;
     color: #e4fefe;
+    padding: 15px 0;
 }
 
-.table-row, .table-header{
-    display: flex;
+.table-row, .table-header {
+    display: grid;
     font-size: 26px;
     font-weight: 300;
-    align-items: flex-start;
-    padding: 2px 0 2px 7px ;
+    align-items: center;
+    padding: 2px 0 2px 7px;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.8fr;
 }
 
+.table-row {
+    justify-items: center;
+    align-items: center;
+}
 
 
 .table-row:hover {
@@ -36,26 +44,69 @@
     color: #1d8871;
 }
 
-.table-cell{
+.table-cell {
     flex: 1;
-    display: flex;
-    flex-direction: row;
-    align-self: flex-start;
 }
 
-.table-body{
+.table-body {
     border-bottom: 1px solid #1d8871;
 }
 
-.delete-button{
+.delete-button {
     width: 150px;
     font-size: 22px;
-    border:1px solid #818888;
+    border: 1px solid #818888;
     border-radius: 2px;
 }
 
-.delete-button:hover{
+.delete-button:hover {
     box-sizing: border-box;
-    border:1px solid #019879;
+    border: 1px solid #019879;
     border-radius: 2px;
+}
+
+#userControlsContainer {
+    display: grid;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 15px 0 0;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 10px;
+    position: absolute;
+    right: 0;
+}
+
+#findUserInput {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #019879;
+    border-radius: 5px;
+}
+
+#findUserInputButton,
+#addUserButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Делаем ширину кнопок равной ширине инпута */
+}
+
+#findUserInputButton {
+    background-color: #019879;
+    color: #e4fefe;
+}
+
+#addUserButton {
+    background-color: #1d8871;
+    color: #e4fefe;
+    margin-top: 10px; /* Добавляем отступ между кнопками */
+    grid-column: span 2;
+}
+
+#findUserInputButton:hover,
+#addUserButton:hover {
+    background-color: #017966;
 }
