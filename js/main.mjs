@@ -20,7 +20,6 @@ import {tableManipulations} from "./tableManipulations.js";
 
     document.addEventListener('click', async (event) => {
         const deleteButton = event.target.closest('.delete-button');
-        console.log(deleteButton)
         if (deleteButton) {
             try {
 
