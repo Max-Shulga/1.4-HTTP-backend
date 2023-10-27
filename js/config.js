@@ -9,7 +9,7 @@ export const config = {
         {title: 'Аватар', value: 'avatar', render: renderImage},
         {title: 'Дата Народження', value: 'birthday', render: renderDate}
     ],
-    apiUrl: "https://mock-api.shpp.me/mshulga/users"
+    apiUrl: "https://mock-api.shpp.me/mvshulga/users"
 };
 
 function renderImage(value) {
