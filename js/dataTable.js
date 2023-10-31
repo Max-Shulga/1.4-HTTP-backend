@@ -46,7 +46,7 @@ function createTableBody(users, columns) {
             }
         });
 
-        const deleteButton = createButton(user);
+        const deleteButton = createButton(user,rowIndex);
         bodyTr.appendChild(deleteButton);
 
         tbody.appendChild(bodyTr);
@@ -55,9 +55,9 @@ function createTableBody(users, columns) {
     return tbody;
 }
 
-function createButton(user) {
+function createButton(user,index) {
     const deleteButton = document.createElement('button');
-    deleteButton.className = "delete-button";
+    deleteButton.className = `delete-button table-row-${index}`;
     deleteButton.dataset.userId = user.id;
     deleteButton.textContent = "Видалити";
     return deleteButton;

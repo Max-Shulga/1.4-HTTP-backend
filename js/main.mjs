@@ -4,6 +4,8 @@ import sendRequest from "./sendRequest.js";
 import {processUserData} from "./processUserData.js";
 import {dataTable} from "./dataTable.js";
 import {tableManipulations} from "./tableManipulations.js";
+import {addUser} from "./addUser.js";
+import {dragAndDrop} from "./imgDragAndDrop.js";
 
 
 (async () => {
@@ -39,6 +41,8 @@ import {tableManipulations} from "./tableManipulations.js";
             }
         }
     });
+    addUser();
+    dragAndDrop();
 })();
 
 

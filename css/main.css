@@ -46,13 +46,16 @@
 
 .table-cell {
     flex: 1;
+    min-height: 60px;
+    display: grid;
+    align-items: center
 }
 
 .table-body {
     border-bottom: 1px solid #1d8871;
 }
 
-.delete-button {
+.delete-button, .add-button {
     width: 150px;
     font-size: 22px;
     border: 1px solid #818888;
@@ -61,16 +64,17 @@
     cursor: pointer;
 }
 
-.delete-button:hover {
+.delete-button:hover , .add-button:hover {
     background-color: #f3f3f3;
     border-color: #1d8871;
 }
 
-.delete-button:active {
+.delete-button:active,.add-button:active {
     background-color: #1d8871;
     border-color: #1d8871;
     transform: translateY(1px);
 }
+
 #userControlsContainer {
     display: grid;
     align-items: center;
@@ -117,6 +121,7 @@
     background-color: #017966;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
 }
+
 #findUserInputButton:active,
 #addUserButton:active {
     background-color: #015a53; /* Цвет при нажатии */
