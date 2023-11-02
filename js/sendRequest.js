@@ -1,4 +1,4 @@
-async function sendRequest(url, method, body = null) {
+export async function sendRequest(url, method, body = null) {
     try {
         const options = {
             method,
@@ -20,4 +20,3 @@ async function sendRequest(url, method, body = null) {
         throw error;
     }
 }
-export default sendRequest
