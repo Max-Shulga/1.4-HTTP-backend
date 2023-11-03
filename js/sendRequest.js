@@ -10,9 +10,8 @@ export async function sendRequest(url, method, body = null) {
 
         const response = await fetch(url, options);
         const data = await response.json();
-
         if (!response.ok) {
-            throw new Error(data)
+            throw new Error(data.error || 'unknown error')
         }
         return data
 

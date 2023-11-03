@@ -14,41 +14,18 @@ export function addUser() {
 
 
         if (checkInputData()) {
-            const id = incrementUniqueID();
             const formData = {
-                data: {
-                    [id]: {
-                        name: inputsData[0].value.trim(),
-                        surname: inputsData[1].value.trim(),
-                        avatar: inputsData[2].value.trim(),
-                        birthday: inputsData[3].value.trim()
-                    }
-                }
+                name: inputsData[0].value.trim(),
+                surname: inputsData[1].value.trim(),
+                avatar: inputsData[2].value.trim(),
+                birthday: inputsData[3].value.trim()
             }
-            const jsonData = JSON.stringify(formData);
-            console.log(jsonData)
 
-            await sendRequest(url, "POST", jsonData)
+            await sendRequest(url, "POST", formData)
             await tableRewriter(userData)
-
-            function getUniqueId() {
-                let uniqueId = localStorage.getItem('uniqueID');
-                if (!uniqueId) {
-                    uniqueId = "50";
-                    localStorage.setItem('uniqueId', uniqueId);
-                }
-                return uniqueId
-            }
-
-            function incrementUniqueID() {
-                let uniqueId = getUniqueId();
-                localStorage.setItem('uniqueID', uniqueId)
-                return uniqueId
-            }
         }
 
         function checkInputData() {
-
             let allInputsFilled = true;
 
             inputsData.map(el => {
@@ -105,7 +82,6 @@ export function addUser() {
                 inputContainers[3].appendChild(createInput('text'));
                 inputContainers[4].appendChild(addText("Введіть дату народження:"));
                 inputContainers[4].appendChild(createInput('date'));
-                // inputContainers[4].appendChild(createInput('text'));
             }
 
             function createInput(type) {
