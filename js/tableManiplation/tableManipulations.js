@@ -21,6 +21,7 @@ export function tableManipulations() {
      * @function modifyTable
      * @param {string} url - The API endpoint URL
      * @param {Object} userData - User data to be manipulated
+     * @param config - Configuration object for the user table
      */
     async function modifyTable(url, userData, config) {
         const deleteButtons = [...document.getElementsByClassName('delete-button')];
@@ -38,29 +39,25 @@ export function tableManipulations() {
         })
 
         const aadUserButton = document.getElementById('addUserButton');
+
+        let inputRowNotCreated = true
         aadUserButton.addEventListener('click', () => {
-
-            const userAdder = addUser();
-            userAdder.addInputRowOnClick();
-
-            const addButton = [...document.getElementsByClassName('add-button')];
-
-            addButton.map(button => {
-                button.addEventListener('click', async () => {
+            if (inputRowNotCreated) {
+                const userAdder = addUser();
+                inputRowNotCreated = false;
+                userAdder.addInputRowOnClick();
+                const addButton = document.getElementById('add-button');
+                addButton.addEventListener('click', async () => {
                     const sendDataToServer = await userAdder.sendUserData(url);
                     if (sendDataToServer) await tableRewriter(userData, config);
                 })
-
-            })
+            }
         })
 
         const searchButton = document.getElementById('findUserInputButton');
 
         searchButton.addEventListener('click', () => {
                 pageSearch();
-
-            }
-        )
-
+            })
     }
 }

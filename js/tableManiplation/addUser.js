@@ -70,7 +70,7 @@ export function addUser() {
 
             function createButton() {
                 const addButton = document.createElement('button');
-                addButton.className = `add-button`;
+                addButton.id = `add-button`;
                 addButton.textContent = "Додати";
                 return addButton;
             }
