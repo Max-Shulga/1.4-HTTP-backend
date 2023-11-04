@@ -9,17 +9,15 @@ import {tableManipulations} from "./tableManiplation/tableManipulations.js";
 (async () => {
     const {apiUrl: url} = config;
 
-    const userData = processUserData();
+    const userDataHandler = processUserData();
 
     const request = await sendRequest(url, 'GET');
 
-    const users = userData.getUserObj(request) ?? fallbackUsers;
+    const users = userDataHandler.getUserObjects(request) ?? fallbackUsers;
 
-    dataTable(users, config);
+    dataTable().createUserTable(users, config);
 
-    const tableManipulation = tableManipulations(url,userData);
-
-    await tableManipulation.modifyTable()
+    await tableManipulations().modifyTable(url, userDataHandler,config)
 
 })();
 

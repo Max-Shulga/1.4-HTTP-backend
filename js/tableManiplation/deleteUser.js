@@ -1,15 +1,13 @@
 import {sendRequest} from "../sendRequest.js";
-import {tableRewriter} from "./tableRewriter.js";
 
-export async function deleteUser(event, url,userData) {
+
+export async function deleteUser(userId, url) {
 
     return deleteUserFromServer()
 
     async function deleteUserFromServer() {
         try {
-            const userId = event.target.dataset.userId;
-            await sendRequest(`${url}/${userId}`, "DELETE")
-            await tableRewriter(userData)
+           await sendRequest(`${url}/${userId}`, "DELETE")
         } catch (error) {
             console.error(error)
         }

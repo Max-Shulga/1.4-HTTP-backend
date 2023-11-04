@@ -1,5 +1,4 @@
 import {sendRequest} from "../sendRequest.js";
-import {tableRewriter} from "./tableRewriter.js";
 
 export function addUser() {
 
@@ -9,7 +8,7 @@ export function addUser() {
         sendUserData: sendUserData
     }
 
-    async function sendUserData(url, userData) {
+    async function sendUserData(url) {
         const inputsData = [...document.getElementsByClassName('new-user-input')]
 
 
@@ -22,8 +21,8 @@ export function addUser() {
             }
 
             await sendRequest(url, "POST", formData)
-            await tableRewriter(userData)
-        }
+            return true;
+        } else return false;
 
         function checkInputData() {
             let allInputsFilled = true;
@@ -44,52 +43,30 @@ export function addUser() {
     }
 
     function addInputRowOnClick() {
-        const aadUserButton = document.getElementById('addUserButton')
 
-        aadUserButton.addEventListener('click', () => {
 
-            createInputContainers()
-            const inputContainers = document.getElementsByClassName('input-cell')
+        createInputContainers();
 
-            addInputsElements()
+        const inputContainers = document.getElementsByClassName('input-cell');
 
-            function createInputContainers() {
-                const numberOfCellsInRow = document.getElementsByClassName('table-row-1').length
+        addInputsElements();
 
-                const newTableRow = document.createElement('tr')
-                const usersTable = document.getElementsByClassName('table-body')[0];
+        function createInputContainers() {
+            const numberOfCellsInRow = document.getElementsByClassName('table-row-1').length
 
-                newTableRow.className = 'table-row';
-                usersTable.insertBefore(newTableRow, usersTable.firstChild);
+            const newTableRow = document.createElement('tr')
+            const usersTable = document.getElementsByClassName('table-body')[0];
 
-                for (let i = 0; i < numberOfCellsInRow - 1; i++) {
-                    const inputContainer = document.createElement('td')
-                    inputContainer.className = `table-body-cell table-cell input-cell`
-                    newTableRow.appendChild(inputContainer)
-                }
+            newTableRow.className = 'table-row';
+            usersTable.insertBefore(newTableRow, usersTable.firstChild);
 
-                newTableRow.appendChild(createButton());
+            for (let i = 0; i < numberOfCellsInRow - 1; i++) {
+                const inputContainer = document.createElement('td')
+                inputContainer.className = `table-body-cell table-cell input-cell`
+                newTableRow.appendChild(inputContainer)
             }
 
-            function addInputsElements() {
-                inputContainers[1].appendChild(addText("Введіть Ім'я:"));
-                inputContainers[1].appendChild(createInput('text'));
-
-                inputContainers[2].appendChild(addText("Введіть Прізвище:"));
-                inputContainers[2].appendChild(createInput('text'));
-
-                inputContainers[3].appendChild(addText("Введіть посилання на зображення :"));
-                inputContainers[3].appendChild(createInput('text'));
-                inputContainers[4].appendChild(addText("Введіть дату народження:"));
-                inputContainers[4].appendChild(createInput('date'));
-            }
-
-            function createInput(type) {
-                const input = document.createElement('input');
-                input.type = type;
-                input.className = 'new-user-input'
-                return input;
-            }
+            newTableRow.appendChild(createButton());
 
             function createButton() {
                 const addButton = document.createElement('button');
@@ -98,13 +75,35 @@ export function addUser() {
                 return addButton;
             }
 
+        }
+
+        function addInputsElements() {
+            inputContainers[1].appendChild(addText("Введіть Ім'я:"));
+            inputContainers[1].appendChild(createInput('text'));
+
+            inputContainers[2].appendChild(addText("Введіть Прізвище:"));
+            inputContainers[2].appendChild(createInput('text'));
+
+            inputContainers[3].appendChild(addText("Введіть посилання на зображення :"));
+            inputContainers[3].appendChild(createInput('text'));
+            inputContainers[4].appendChild(addText("Введіть дату народження:"));
+            inputContainers[4].appendChild(createInput('date'));
+
+            function createInput(type) {
+                const input = document.createElement('input');
+                input.type = type;
+                input.className = 'new-user-input'
+                return input;
+            }
+
             function addText(text) {
                 const pElement = document.createElement('p')
                 pElement.innerHTML = text;
                 pElement.style.fontSize = "14px";
                 return pElement;
             }
+        }
 
-        })
+        return true;
     }
 }

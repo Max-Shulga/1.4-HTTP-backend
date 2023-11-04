@@ -1,12 +1,11 @@
 import {sendRequest} from "../sendRequest.js";
 import fallbackUsers from "../fallbackUsers.js";
 import {dataTable} from "../dataTable.js";
-import {config} from "../config.js";
 
-export async function tableRewriter(userData) {
+export async function tableRewriter(userData,config) {
     const request = await sendRequest(config.apiUrl, 'GET');
-    const users = userData.getUserObj(request) ?? fallbackUsers;
+    const users = userData.getUserObjects(request) ?? fallbackUsers;
     const table = document.getElementsByClassName('table')[0];
     table.remove();
-    dataTable(users, config);
+    dataTable().createUserTable(users, config);
 }
