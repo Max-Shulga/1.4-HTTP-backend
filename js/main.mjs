@@ -15,7 +15,10 @@ import {tableManipulations} from "./tableManiplation/tableManipulations.js";
 
     const users = userDataHandler.getUserObjects(request) ?? fallbackUsers;
 
+
     dataTable().createUserTable(users, config);
+
+    document.getElementById('userControlsContainer').style.display = 'grid';
 
     await tableManipulations().modifyTable(url, userDataHandler,config)
 

@@ -8,9 +8,7 @@ import {pageSearch} from "./pageSearch.js";
  * @module tableManipulations
  */
 
-
 export function tableManipulations() {
-
 
     return {
         modifyTable: modifyTable
