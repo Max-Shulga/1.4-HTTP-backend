@@ -1,34 +1,21 @@
-import {config} from "./config.js" ;
-import fallbackUsers from "./fallbackUsers.js";
-import {sendRequest} from "./sendRequest.js";
-import {processUserData} from "./processUserData.js";
-import {dataTable} from "./dataTable.js";
+import {config} from "./usersDataAndServer/config.js";
+import {tableWriter} from "./tableWriter/tableWriter.js";
+import {getUsersData} from "./usersDataAndServer/getUsersData.js";
 import {tableManipulations} from "./tableManiplation/tableManipulations.js";
 
 
 (async () => {
-    const {apiUrl: url} = config;
+    try {
+        const users = await getUsersData()
+        await tableWriter(config, users)
 
-    const userDataHandler = processUserData();
+        document.getElementById('userControlsContainer').style.display = 'grid';
 
-    const request = await sendRequest(url, 'GET');
+        const tableManipulation = tableManipulations(config, users)
 
-    const users = userDataHandler.getUserObjects(request) ?? fallbackUsers;
-
-
-    dataTable().createUserTable(users, config);
-
-    document.getElementById('userControlsContainer').style.display = 'grid';
-
-    await tableManipulations().modifyTable(url, userDataHandler,config)
-
+        await tableManipulation.addUser()
+        tableManipulation.tableSearch()
+    } catch (error) {
+        console.error('An error occurred:', error)
+    }
 })();
-
-
-
-
-
-
-
-
-

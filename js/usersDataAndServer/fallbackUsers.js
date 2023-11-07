@@ -1,4 +1,4 @@
-const fallbackUsers = [
+export const fallbackUsers = [
     {id: 30052, name: 'Оля', surname: 'Іванова', age: 28, city: 'Київ', position: 'Розробник'},
     {id: 30053, name: 'Петро', surname: 'Сидоров', age: 34, city: 'Львів', position: 'Архітектор'},
     {id: 30054, name: 'Наталія', surname: 'Петренко', age: 22, city: 'Одеса', position: 'Тестувальник'},
@@ -20,4 +20,6 @@ const fallbackUsers = [
     {id: 30070, name: 'Надія', surname: 'Шевчук', age: 26, city: 'Бердянськ', position: 'Тестувальник'},
     {id: 30071, name: 'Максим', surname: 'Панасенко', age: 33, city: 'Сімферополь', position: 'Дизайнер'},
 ];
-export default fallbackUsers
+
+
+

@@ -15,7 +15,7 @@ export const config = {
         {title: 'Аватар', value: 'avatar', render: renderImage},
         {title: 'Дата Народження', value: 'birthday', render: renderDate}
     ],
-    apiUrl: "https://mock-api.shpp.me/mvshulga/users"
+    apiUrl: "https://m1ock-api.shpp.me/mashulga/users"
 };
 
 /**
@@ -25,7 +25,7 @@ export const config = {
  * @returns {HTMLImageElement} - The image element
  */
 function renderImage(value) {
-    const  img = document.createElement('img')
+    const img = document.createElement('img')
     img.src = value;
     img.width = imageWidth;
     return img;

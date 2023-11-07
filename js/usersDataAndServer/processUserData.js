@@ -21,11 +21,15 @@ export function processUserData() {
      * @returns {Array} - An array of user objects with added unique identifiers
      */
     function addUniqIdToObjects(response) {
-        return Object.entries(response.data).map(([id, obj]) => {
-            return {
-                id: Number(id),
-                ...obj
-            };
-        })
+        if (response) {
+            return Object.entries(response.data).map(([id, obj]) => {
+                return {
+                    id: Number(id),
+                    ...obj
+                };
+            })
+        } else {
+            return null;
+        }
     }
 }
