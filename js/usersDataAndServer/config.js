@@ -15,7 +15,7 @@ export const config = {
         {title: 'Аватар', value: 'avatar', render: renderImage},
         {title: 'Дата Народження', value: 'birthday', render: renderDate}
     ],
-    apiUrl: "https://m1ock-api.shpp.me/mashulga/users"
+    apiUrl: "https://mock-api.shpp.me/mashulga/users"
 };
 
 /**
