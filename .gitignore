@@ -79,3 +79,5 @@ fabric.properties
 /.idea/vcs.xml
 /.idea/1.4-HTTP-backend.iml
 /.idea/.gitignore
+/node_modules/
+/package-lock.json

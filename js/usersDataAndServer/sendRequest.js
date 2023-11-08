@@ -7,24 +7,23 @@
  * @throws {Error} - Throws an error if the response status is not OK or if there is a network error.
  */
 export async function sendRequest(url, method, body = null) {
-    try {
-        const options = {
-            method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: body ? JSON.stringify(body) : null
-        }
+  try {
+    const options = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body ? JSON.stringify(body) : null,
+    };
 
-        const response = await fetch(url, options);
-        const data = await response.json();
-        if (!response.ok) {
-            throw new Error(data.error || 'unknown error')
-        }
-        return data
-
-    } catch (error) {
-        return null //todo I couldn't think of a better way to handle a failed request.
-        // throw error;
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || "unknown error");
     }
+    return data;
+  } catch (error) {
+    return null; //todo I couldn't think of a better way to handle a failed request.
+    // throw error;
+  }
 }

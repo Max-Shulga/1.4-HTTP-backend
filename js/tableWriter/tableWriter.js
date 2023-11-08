@@ -7,7 +7,7 @@ import {dataTable} from "./dataTable.js";
  */
 export async function tableWriter(config, users) {
 
-    const existingTable = document.getElementsByClassName('table')[0];
+    const existingTable = document.getElementsByClassName("table")[0];
     if (existingTable) existingTable.remove();
 
     dataTable().createUserTable(users, config);

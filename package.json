@@ -8,5 +8,8 @@
   "description": "1.4 study repository for 1.4 lvl",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.0.3"
+  }
 }
